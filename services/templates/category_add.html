@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- category_add.html -->
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+               <li {% if message.tags %} class="{{ message.tags}}" {% endif %}> 
+                {{message}}
+               </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h1>Add  Category</h1>
+    <form method="post" action="{% url 'services:add_category'%}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Add Category</button>
+    </form>
+</body>
+</html>

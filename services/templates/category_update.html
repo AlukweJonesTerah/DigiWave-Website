@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- category_update.html -->
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+               <li {% if message.tags %} class="{{ message.tags}}" {% endif %}> 
+                {{message}}
+               </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h1>Category Update</h1>
+    <form method="post" action="{% url 'services:update_category' slug=category.slug %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Category Update</button>
+    </form>
+
+    <a href="{% url 'services:add_sub_category' slug=category.slug %}">Add a sub_category_add</a>
+
+    <!-- Back button using JavaScript -->
+    <button onclick="goBack()">Back</button>
+
+    <script>
+        function goBack(){
+            window.history.back()
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- delete_all_categories.html -->
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+               <li {% if message.tags %} class="{{ message.tags}}" {% endif %}> 
+                {{message}}
+               </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h1>Confirm Deletion Of All Categories</h1>
+    <form method="post" action="{% url 'services:delete_all_categories' %}">
+        {% csrf_token %}
+        {{confirm_form.as_p}}
+        <button type="submit">Confirm Deletion Of All Categories</button>
+    </form>
+</body>
+</html>

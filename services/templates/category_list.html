@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- category_list -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+               <li {% if message.tags %} class="{{ message.tags}}" {% endif %}> 
+                {{message}}
+               </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <h1>Categories List</h1>
+    {% if categories %}
+    <ul>
+        {% for category in categories %}
+
+            {% if category.slug %}
+                <li><a href="{% url 'services:category_detail' slug=category.slug %}">{{category.name}}</a></li>
+
+            {% endif %}
+            
+        {% endfor %}
+    </ul>
+    <a href="{% url 'services:delete_all_categories' %}">Delete All Categories</a>
+    <a href="{% url 'services:add_category' %}">Add More Categories</a>
+    {% else %}
+    <a href="{% url 'services:add_category' %}">Create Category(ies)</a>
+    {% endif %}
+
+    <!-- Back button using JavaScript -->
+    <button onclick="goBack()">Back</button>
+
+    <script>
+        function goBack(){
+            window.history.back()
+        }
+    </script>
+</body>
+</html>

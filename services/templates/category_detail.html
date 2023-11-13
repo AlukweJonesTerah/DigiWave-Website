@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- category details -->
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
+                        {{message}}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h1>Category Details</h1>
+        {% if category.slug %}
+        <p>{{category.name}}</p>
+        <p>{{category.category_description}}</p>
+        <p>{{category.date_added}}</p>
+
+        <ul>
+        <li><a href = "{% url 'services:categories_list' %}">Categories List</a></li>
+        <li><a href = "{% url 'services:update_category' slug=category.slug %}"> Update Category </a></li>
+        <li><a href = "{% url 'services:delete_category' slug=category.slug %}"> Delete Category</a></li>
+        <li><a href = "{% url 'services:add_category' %}">Add A Category</a></li>
+        </ul>
+        {% endif %}
+        <!-- Back button using JavaScript -->
+        <button onclick="goBack()">Back</button>
+
+        <script>
+            function goBack(){
+                window.history.back()
+            }
+        </script>
+</body>
+</html>
